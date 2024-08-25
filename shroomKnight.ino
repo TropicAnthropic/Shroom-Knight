@@ -1304,68 +1304,83 @@ void drawTiles()
       {
         ////////// Platform Tiles
 
-        if (roomTiles[x][y] ==21)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile21, 0);
+        // if (roomTiles[x][y] ==21)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile21, 0);
 
-        if (roomTiles[x][y] ==22)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile22, 0);
+        // if (roomTiles[x][y] ==22)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile22, 0);
 
-        if (roomTiles[x][y] ==23)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile23, 0);
+        // if (roomTiles[x][y] ==23)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile23, 0);
 
-        if (roomTiles[x][y] ==24)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile24, 0);
+        // if (roomTiles[x][y] ==24)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile24, 0);
 
-        if (roomTiles[x][y] ==25)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile25, 0);
+        // if (roomTiles[x][y] ==25)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile25, 0);
 
-        if (roomTiles[x][y] ==26)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile26, 0);
+        // if (roomTiles[x][y] ==26)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile26, 0);
 
-        if (roomTiles[x][y] ==27)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile27, 0);
+        // if (roomTiles[x][y] ==27)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile27, 0);
 
-        if (roomTiles[x][y] ==28)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile28, 0);
+        // if (roomTiles[x][y] ==28)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile28, 0);
 
-        if (roomTiles[x][y] ==29)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile29, 0);
+        // if (roomTiles[x][y] ==29)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile29, 0);
 
-        if (roomTiles[x][y] ==30)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile30, 0);
+        // if (roomTiles[x][y] ==30)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile30, 0);
 
-        if (roomTiles[x][y] ==31)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile31, 0);
+        // if (roomTiles[x][y] ==31)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile31, 0);
 
-        if (roomTiles[x][y] ==32)
-        {
-          Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile32, 0);
+        // if (roomTiles[x][y] ==32)
+        // {
+        //   Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile32, 0);
+        //   int r = rand() % 1000;
+        //   if(r==0)
+        //   Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0); // sparkle
+        // }
+
+        // if (roomTiles[x][y] ==33)
+        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0);   
+
+        uint8_t tileNumber = roomTiles[x][y];
+        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
+
+        if (tileNumber == 32) {
+
           int r = rand() % 1000;
-          if(r==0)
-          Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0); // sparkle
+          if (r==0)
+          Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21); // sparkle
+          
         }
-
-        if (roomTiles[x][y] ==33)
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0);   
 
         //////////
 
-        if (roomTiles[x][y] ==7)
+        // if (roomTiles[x][y] ==7)
+        if (tileNumber ==7)
         {
-          if(animSlow3 ==1)
-          Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid1, 0);
+          // if(animSlow3 ==1)
+          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid1, 0);
 
-          if(animSlow3 ==2)
-          Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid2, 0);
+          // if(animSlow3 ==2)
+          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid2, 0);
 
-          if(animSlow3 ==3)
-          Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid3, 0);
+          // if(animSlow3 ==3)
+          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid3, 0);
+          Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid, animSlow3 - 1);
         }
 
-        if (roomTiles[x][y] ==8)
+        // if (roomTiles[x][y] ==8)
+        if (tileNumber ==8)
         Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeFloor, spikeFloorMask,0, 0);
 
-        if (roomTiles[x][y] ==9)
+        // if (roomTiles[x][y] ==9)
+        if (tileNumber ==9)
         Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
       }
     }
