@@ -789,3 +789,16 @@ const uint8_t PROGMEM room10[] =
 
   4,23,24,
 };
+
+const uint8_t * const rooms[] = { 
+  room1,
+  room2,
+  room3,
+  room4,
+  room5,
+  room6,
+  room7,
+  room8,
+  room9,
+  room10
+};

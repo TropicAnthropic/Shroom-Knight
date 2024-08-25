@@ -308,36 +308,37 @@ void newRoom()
 
 void getRoom()
 {
-  if (roomNumber == 1)
-  roomOne();
+  // if (roomNumber == 1)
+  // getRoomDimensions(1);
 
-  if (roomNumber == 2)
-  roomTwo();
+  // if (roomNumber == 2)
+  // roomTwo();
 
-  if (roomNumber == 3)
-  roomThree();
+  // if (roomNumber == 3)
+  // roomThree();
 
-  if (roomNumber == 4)
-  roomFour();
+  // if (roomNumber == 4)
+  // roomFour();
 
-  if (roomNumber == 5)
-  roomFive();
+  // if (roomNumber == 5)
+  // roomFive();
 
-  if (roomNumber == 6)
-  roomSix();
+  // if (roomNumber == 6)
+  // roomSix();
 
-  if (roomNumber == 7)
-  roomSeven();
+  // if (roomNumber == 7)
+  // roomSeven();
 
-  if (roomNumber == 8)
-  roomEaight();
+  // if (roomNumber == 8)
+  // roomEaight();
 
-  if (roomNumber == 9)
-  roomNine();
+  // if (roomNumber == 9)
+  // roomNine();
 
-  if (roomNumber == 10)
-  roomTen();
+  // if (roomNumber == 10)
+  // roomTen();
 
+  getRoomDimensions(roomNumber);
   populateRoom();
 }
 
@@ -345,8 +346,8 @@ void getRoom()
 
 void populateRoom()
 {
-  int x;
-  int y;
+  uint8_t x;
+  uint8_t y;
 
   for (y = 0; y < 24; y++) // clear room space
   {
@@ -396,7 +397,7 @@ void populateRoom()
   drawBorder();
   }
 
-  fillRoom();
+  fillRoom(roomNumber);
 }
 
 void drawBorder()
