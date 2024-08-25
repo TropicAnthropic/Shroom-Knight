@@ -1349,21 +1349,41 @@ void drawTiles()
         // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0);   
 
         uint8_t tileNumber = roomTiles[x][y];
-        Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
 
-        if (tileNumber == 32) {
+        switch (tileNumber) {
 
-          int r = rand() % 1000;
-          if (r==0)
-          Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21); // sparkle
+          case 21 ... 31:
+          case 33:
+            Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
+            break;
+
+          case 32:
+            {
+              Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
+              int r = rand() % 1000;
+              if (r==0)
+              Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21); // sparkle
+            }
+            break;
+
+          case 7:
+            Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid, animSlow3 - 1);
+            break;
+
+          case 8:
+            Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeFloor, spikeFloorMask,0, 0);
+            break;
+
+          case 9:
+            Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
+            break;
           
         }
 
         //////////
 
         // if (roomTiles[x][y] ==7)
-        if (tileNumber ==7)
-        {
+        // {
           // if(animSlow3 ==1)
           // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid1, 0);
 
@@ -1372,16 +1392,13 @@ void drawTiles()
 
           // if(animSlow3 ==3)
           // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid3, 0);
-          Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid, animSlow3 - 1);
-        }
+        // }
 
         // if (roomTiles[x][y] ==8)
-        if (tileNumber ==8)
-        Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeFloor, spikeFloorMask,0, 0);
+        // Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeFloor, spikeFloorMask,0, 0);
 
         // if (roomTiles[x][y] ==9)
-        if (tileNumber ==9)
-        Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
+        // Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
       }
     }
   }
@@ -1472,14 +1489,16 @@ void drawDrones()
     droneScreenX[i] = droneX[i]/10;
     droneScreenY[i] = droneY[i]/10;
 
-    if (animSlow3 == 1)
-    Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone1,  0);
+    // if (animSlow3 == 1)
+    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone1,  0);
 
-    if (animSlow3 == 2)
-    Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone2,  0);
+    // if (animSlow3 == 2)
+    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone2,  0);
 
-    if (animSlow3 == 3)
-    Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone3,  0);
+    // if (animSlow3 == 3)
+    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone3,  0);
+
+    Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone,  animSlow3 -1);
 
     if(playerDeathCountdown==0)
     {
