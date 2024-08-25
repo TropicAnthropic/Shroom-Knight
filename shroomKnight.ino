@@ -1,6 +1,6 @@
 // Shroom Knight
-// Version 1.00
-// July 31st 24 - August 21st, 24
+// Version 3.00
+// July 31st 24 - August 25th, 24
 // Onebit Productions
 // Matthew Bryan
 
@@ -34,10 +34,10 @@ void loop()
 
     Sprites::drawOverwrite(32, 16, titleScreen2,0);
 
-    Sprites::drawOverwrite(77, 41, speaker,0);
+    Sprites::drawOverwrite(67, 41, speaker1,0);
 
     if(Arduboy2Audio::enabled())
-	  Sprites::drawOverwrite(86, 41, soundIcon,0);
+	Sprites::drawOverwrite(86, 41, sound1,0);
 
     arduboy.display();
     menuInput();
