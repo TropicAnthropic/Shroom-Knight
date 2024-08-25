@@ -1682,24 +1682,26 @@ void drawPlayer()
     {
       if(stoppedX)
       {
-        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
+        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
+        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyRight, 1);
       }
       else
       {
-        if(animSlow3==1)
-        {
-        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight1,0);
-        }
+        // if(animSlow3==1)
+        // {
+        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight1,0);
+        // }
 
-        if(animSlow3==2)
-        {
-        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
-        }
+        // if(animSlow3==2)
+        // {
+        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
+        // }
 
-        if(animSlow3==3)
-        {
-        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight3,0);
-        }
+        // if(animSlow3==3)
+        // {
+        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight3,0);
+        // }
+        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyRight, animSlow3 - 1);
       }
     }
 
@@ -1718,24 +1720,26 @@ void drawPlayer()
     {
       if(stoppedX)
       {
-        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
+        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
+        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyLeft, 1);
       }
       else
       {
-        if(animSlow3==1)
-        {
-          Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft1,0);
-        }
+        // if(animSlow3==1)
+        // {
+        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft1,0);
+        // }
 
-        if(animSlow3==2)
-        {
-          Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
-        }
+        // if(animSlow3==2)
+        // {
+        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
+        // }
 
-        if(animSlow3==3)
-        {
-          Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft3,0);
-        }
+        // if(animSlow3==3)
+        // {
+        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft3,0);
+        // }
+        Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyLeft, animSlow3 - 1);
       }
     }
 
@@ -1769,43 +1773,43 @@ void drawHud()
     if (textRef == 1)
     {
       tinyfont.setCursor(20,20);
-      tinyfont.print("LOOK SKILL");
+      tinyfont.print(F("LOOK SKILL"));
       tinyfont.setCursor(5,30);
-      tinyfont.print("PRESS UP AND DOWN");
+      tinyfont.print(F("PRESS UP AND DOWN"));
     }
 
     if (textRef == 2)
     {
       tinyfont.setCursor(20,20);
-      tinyfont.print("DOUBLE JUMP SKILL");
+      tinyfont.print(F("DOUBLE JUMP SKILL"));
       tinyfont.setCursor(25,30);
-      tinyfont.print("HIT A TWICE");
+      tinyfont.print(F("HIT A TWICE"));
     }
 
     if (textRef == 3)
     {
       tinyfont.setCursor(40,20);
-      tinyfont.print("SWORD SKILL");
+      tinyfont.print(F("SWORD SKILL"));
       tinyfont.setCursor(20,30);
-      tinyfont.print("PRESS B TO ATTACK");
+      tinyfont.print(F("PRESS B TO ATTACK"));
     }
 
     if (textRef == 5)
     {
       tinyfont.setCursor(40,20);
-      tinyfont.print("GUN SKILL");
+      tinyfont.print(F("GUN SKILL"));
       tinyfont.setCursor(15,30);
-      tinyfont.print("PRESS B TO SHOOT");
+      tinyfont.print(F("PRESS B TO SHOOT"));
     }
 
     if (textRef == 4)
     {
       tinyfont.setCursor(65,10);
-      tinyfont.print("ESCAPE");
+      tinyfont.print(F("ESCAPE"));
       tinyfont.setCursor(55,15);
-      tinyfont.print("THE TESTING");
+      tinyfont.print(F("THE TESTING"));
       tinyfont.setCursor(65,20);
-      tinyfont.print("FACILITY");
+      tinyfont.print(F("FACILITY"));
     }
   }
 
@@ -1887,7 +1891,7 @@ void gameOver()
   Tinyfont tinyfont = Tinyfont(arduboy.sBuffer, Arduboy2::width(), Arduboy2::height());
   arduboy.clear();
   tinyfont.setCursor(5,30);
-  tinyfont.print("YOU HAVE BEEN DESTROYED");
+  tinyfont.print(F("YOU HAVE BEEN DESTROYED"));
   arduboy.display();
   arduboy.delayShort(3000);
   arduboy.clear();
@@ -1900,11 +1904,11 @@ void win()
   Tinyfont tinyfont = Tinyfont(arduboy.sBuffer, Arduboy2::width(), Arduboy2::height());
   arduboy.clear();
   tinyfont.setCursor(20,10);
-  tinyfont.print("YOU DEFEATED THE");
+  tinyfont.print(F("YOU DEFEATED THE"));
   tinyfont.setCursor(40,20);
-  tinyfont.print("MECHANICS");
+  tinyfont.print(F("MECHANICS"));
   tinyfont.setCursor(30,40);
-  tinyfont.print("TIME PASSED:");
+  tinyfont.print(F("TIME PASSED:"));
   tinyfont.setCursor(30,50);
   tinyfont.print(timer);
   arduboy.display();
