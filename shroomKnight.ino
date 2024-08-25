@@ -346,12 +346,9 @@ void getRoom()
 
 void populateRoom()
 {
-  uint8_t x;
-  uint8_t y;
-
-  for (y = 0; y < 24; y++) // clear room space
+  for (uint8_t y = 0; y < 24; y++) // clear room space
   {
-    for (x = 0; x < 24; x++)
+    for (uint8_t x = 0; x < 24; x++)
     {
       roomTiles[x][y] = 0;
     }
@@ -391,10 +388,10 @@ void populateRoom()
 
   if ((roomNumber==4)||(roomNumber==5)||(roomNumber==8))
   {
-  borX = 32;
-  borY = 32;
+    borX = 32;
+    borY = 32;
 
-  drawBorder();
+    drawBorder();
   }
 
   fillRoom(roomNumber);
@@ -402,22 +399,17 @@ void populateRoom()
 
 void drawBorder()
 {
+  for (uint8_t x = 0; x < roomTileWidth; x++) {
+    roomTiles[x][0] = borX;
+    roomTiles[x][roomTileHeight-1] = borX;
+  }
 
-  int x;
-  int y;
-
-  for (x = 0; x < roomTileWidth; x++) // top row
-  roomTiles[x][0] = borX;
-
-  for (x = 0; x < roomTileWidth; x++) // bottom row
-  roomTiles[x][roomTileHeight-1] = borX;
-
-  for (y = 0; y < roomTileHeight; y++) // left colomb
-  roomTiles[0][y] = borY;
-
-  for (y = 0; y < roomTileHeight ; y++) // right columb
-  roomTiles[roomTileWidth-1][y] = borY;
+  for (uint8_t y = 0; y < roomTileHeight; y++) {
+    roomTiles[0][y] = borY;
+    roomTiles[roomTileWidth-1][y] = borY;
+  }
 }
+
 
 void animations()
 {
@@ -804,7 +796,7 @@ void moveArrows()
 
 void drawArrows()
 {
-  for (int i = 0; arrowNumber > i; i ++)
+  for (uint8_t i = 0; arrowNumber > i; i ++)
   {
     if(arrowExist[i])
     {
@@ -821,7 +813,7 @@ void drawArrows()
 
 void spawnBits()
 {
-  for(int i = 0; bitNumber > i; i++)
+  for(uint8_t i = 0; bitNumber > i; i++)
   {
     if(bitExist[i]==0)
     {
@@ -921,7 +913,7 @@ void moveBits()
 
 void drawBits()
 {
-  for(int i = 0; bitNumber > i; i++)
+  for(uint8_t i = 0; bitNumber > i; i++)
   {
     if(bitExist[i]>0)
     {
@@ -946,28 +938,37 @@ void shakeScreen()
 {
   int r = rand() % 4;
 
-  if(playerAttackCountdown>0)
-  {
-    if(r==0)
-    screenPushX = screenPushX + 7;
-    if(r==1)
-    screenPushX = screenPushX - 7;
-    if(r==2)
-    screenPushY = screenPushY + 3;
-    if(r==3)
-    screenPushY = screenPushY - 3;
-  }
-  else
-  {
-    if(r==0)
-    screenPushX = screenPushX + 1;
-    if(r==1)
-    screenPushX = screenPushX - 1;
-    if(r==2)
-    screenPushY = screenPushY + 3;
-    if(r==3)
-    screenPushY = screenPushY - 10;
-  }
+  //                        Coutdown > 0     Coutdown = 0
+  const int8_t shakeX[] = { 7, -7, 0,  0,    1, -1, 0,   0 };
+  const int8_t shakeY[] = { 0,  0, 3, -3,    0,  0, 3, -10 };
+
+  if(playerAttackCountdown == 0) r = r + 4;
+
+  screenPushX = screenPushX + shakeX[r];
+  screenPushY = screenPushY + shakeY[r];
+
+  // if(playerAttackCountdown>0)
+  // {
+  //   if(r==0)
+  //   screenPushX = screenPushX + 7;
+  //   if(r==1)
+  //   screenPushX = screenPushX - 7;
+  //   if(r==2)
+  //   screenPushY = screenPushY + 3;
+  //   if(r==3)
+  //   screenPushY = screenPushY - 3;
+  // }
+  // else
+  // {
+  //   if(r==0)
+  //   screenPushX = screenPushX + 1;
+  //   if(r==1)
+  //   screenPushX = screenPushX - 1;
+  //   if(r==2)
+  //   screenPushY = screenPushY + 3;
+  //   if(r==3)
+  //   screenPushY = screenPushY - 10;
+  // }
 }
 
 
@@ -1079,39 +1080,40 @@ void moveEnemies()
 {
   for (int i = 0; enemyNumber > i; i++)
   {
-  if (enemyExist[i]>0) // Enemy AI
-  {
-    // detect right
-    if (enemyGoRight[i])
+    if (enemyExist[i]>0) // Enemy AI
     {
-      if(roomTiles[(enemyX[i]+170)/160][(enemyY[i]+80)/160] > 20) // single point at right (Full)
-      enemyGoRight[i] = false;
-    
-      if(roomTiles[(enemyX[i]+170)/160][(enemyY[i]+170)/160] < 21) // single point at right down (Empty)
-      enemyGoRight[i] = false;
-    
-    }
+      // detect right
+      if (enemyGoRight[i])
+      {
+        if(roomTiles[(enemyX[i]+170)/160][(enemyY[i]+80)/160] > 20) // single point at right (Full)
+        enemyGoRight[i] = false;
+      
+        if(roomTiles[(enemyX[i]+170)/160][(enemyY[i]+170)/160] < 21) // single point at right down (Empty)
+        enemyGoRight[i] = false;
+      
+      }
 
-    // detect left
-    if (!enemyGoRight[i])
-    {
-      if(roomTiles[(enemyX[i]-10)/160][(enemyY[i]+80)/160] > 20) // single point at left (Full)
-      enemyGoRight[i] = true;
+      // detect left
+      // if (!enemyGoRight[i])
+      else {
+        if(roomTiles[(enemyX[i]-10)/160][(enemyY[i]+80)/160] > 20) // single point at left (Full)
+        enemyGoRight[i] = true;
 
-      if(roomTiles[(enemyX[i]-10)/160][(enemyY[i]+170)/160] < 21) // single point at left down (Empty)
-      enemyGoRight[i] = true;
-    }
+        if(roomTiles[(enemyX[i]-10)/160][(enemyY[i]+170)/160] < 21) // single point at left down (Empty)
+        enemyGoRight[i] = true;
+      }
 
-    if (enemyGoRight[i])
-    {
-      enemyX[i]=enemyX[i] + 5;
-    }
+      if (enemyGoRight[i])
+      {
+        enemyX[i]=enemyX[i] + 5;
+      }
 
-    if (!enemyGoRight[i])
-    {
-      enemyX[i]=enemyX[i] - 5;
+      // if (!enemyGoRight[i])
+      else
+      {
+        enemyX[i]=enemyX[i] - 5;
+      }
     }
-  }
   }
 }
 
@@ -1130,7 +1132,8 @@ void moveDrones()
     }
 
     // detect left
-    if (!droneGoRight[i])
+    // if (!droneGoRight[i])
+    else
     {
       if(roomTiles[(droneX[i]-10)/160][(droneY[i]+80)/160] > 20) // single point at left (Full)
       droneGoRight[i] = true;
@@ -1149,7 +1152,8 @@ void moveDrones()
       droneX[i]=droneX[i] + 5;
     }
 
-    if (!droneGoRight[i])
+    // if (!droneGoRight[i])
+    else
     {
       droneX[i]=droneX[i] - 5;
     }
@@ -1168,7 +1172,8 @@ void moveBoss()
     }
 
     // detect left
-    if (!bossGoRight)
+    // if (!bossGoRight)
+    else
     {
       if(roomTiles[(bossX-10)/160][(bossY+160)/160] > 20) // single point at left (Full)
       bossGoRight = true;
@@ -1179,7 +1184,8 @@ void moveBoss()
       bossX = bossX + 2;
     }
 
-    if (!bossGoRight)
+    // if (!bossGoRight)
+    else
     {
       bossX = bossX - 2;
     }
@@ -1209,7 +1215,7 @@ void moveBoss()
   }
 
 
-  for(int i = 0; arrowNumber > i; i++)
+  for(uint8_t i = 0; arrowNumber > i; i++)
   {
     if (arrowExist[i])
     {
