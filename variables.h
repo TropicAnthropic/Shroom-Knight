@@ -154,6 +154,7 @@ int arrowScreenY[3];
 bool startGame = false;
 uint8_t anim3 = 1;
 uint8_t animSlow3 = 1;
+uint8_t animVerySlow3 = 1;
 uint8_t counter = 1;
 
 // Enemy Variables
