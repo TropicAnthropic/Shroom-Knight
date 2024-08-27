@@ -1,7 +1,7 @@
 // Shroom Knight
-// Version 3.00
-// July 31st 24 - August 25th, 24
-// Onebit Productions
+// Version 2.00
+// July 31st 24 - August 27th, 24
+// Onebit Productions & Filmote
 // Matthew Bryan
 
 #include <Arduboy2.h>
@@ -37,7 +37,7 @@ void loop()
     Sprites::drawOverwrite(67, 41, speaker1,0);
 
     if(Arduboy2Audio::enabled())
-	Sprites::drawOverwrite(86, 41, sound1,0);
+	  Sprites::drawOverwrite(86, 41, sound1,0);
 
     arduboy.display();
     menuInput();
@@ -137,7 +137,7 @@ void newRoom()
 
     if (playerLocateX>2600)
     {
-      playerTileX = 3;
+      playerTileX = 4;
       playerTileY = 10;
       modX = 520;
       roomNumber = 4;
@@ -250,11 +250,24 @@ void newRoom()
 
   if((roomNumber==8)&&(!roomChanged))
   {
+
+    if (playerLocateX<600)
+    {
+    playerTileX = 20;
+    playerTileY = 22;
+    modX = -320;
+    roomNumber = 11;
+    roomChanged = true;
+    }
+
+    if (playerLocateX>600)
+    {
     playerTileX = 2;
     playerTileY = 1;
     modX = 520;
     roomNumber = 4;
     roomChanged = true;
+    }
   }
 
   if((roomNumber==9)&&(!roomChanged))
@@ -300,6 +313,15 @@ void newRoom()
     }
   }
 
+  if((roomNumber==11)&&(!roomChanged))
+  {
+    playerTileX = 2;
+    playerTileY = 2;
+    modX = 320;
+    roomNumber = 8;
+    roomChanged = true;
+  }
+
   if(swapRoom)
   swapRoom = false;
 
@@ -308,36 +330,6 @@ void newRoom()
 
 void getRoom()
 {
-  // if (roomNumber == 1)
-  // getRoomDimensions(1);
-
-  // if (roomNumber == 2)
-  // roomTwo();
-
-  // if (roomNumber == 3)
-  // roomThree();
-
-  // if (roomNumber == 4)
-  // roomFour();
-
-  // if (roomNumber == 5)
-  // roomFive();
-
-  // if (roomNumber == 6)
-  // roomSix();
-
-  // if (roomNumber == 7)
-  // roomSeven();
-
-  // if (roomNumber == 8)
-  // roomEaight();
-
-  // if (roomNumber == 9)
-  // roomNine();
-
-  // if (roomNumber == 10)
-  // roomTen();
-
   getRoomDimensions(roomNumber);
   populateRoom();
 }
@@ -394,6 +386,14 @@ void populateRoom()
     drawBorder();
   }
 
+  if(roomNumber == 11)
+  {
+    borX = 0;
+    borY = 0;
+
+    drawBorder();
+  }
+
   fillRoom(roomNumber);
 }
 
@@ -425,10 +425,15 @@ void animations()
     timer++;
     animSlow3++;
     if (animSlow3 == 4)
-    animSlow3 = 1;
+    {
+      animSlow3 = 1;
+      animVerySlow3++;
+      if (animVerySlow3 == 4)
+      animVerySlow3 = 1;
+    }
   }
 
-timer10 = timer / 10;
+  timer10 = timer / 10;
 
   anim3++;
   if (anim3 == 4)
@@ -946,29 +951,6 @@ void shakeScreen()
 
   screenPushX = screenPushX + shakeX[r];
   screenPushY = screenPushY + shakeY[r];
-
-  // if(playerAttackCountdown>0)
-  // {
-  //   if(r==0)
-  //   screenPushX = screenPushX + 7;
-  //   if(r==1)
-  //   screenPushX = screenPushX - 7;
-  //   if(r==2)
-  //   screenPushY = screenPushY + 3;
-  //   if(r==3)
-  //   screenPushY = screenPushY - 3;
-  // }
-  // else
-  // {
-  //   if(r==0)
-  //   screenPushX = screenPushX + 1;
-  //   if(r==1)
-  //   screenPushX = screenPushX - 1;
-  //   if(r==2)
-  //   screenPushY = screenPushY + 3;
-  //   if(r==3)
-  //   screenPushY = screenPushY - 10;
-  // }
 }
 
 
@@ -1302,68 +1284,13 @@ void drawTiles()
     {
       if (x*16>screenX-16&&x*16<screenX+144&&y*16>screenY-16&&y*16<screenY+80) // only draw blocks in view
       {
-        ////////// Platform Tiles
-
-        // if (roomTiles[x][y] ==21)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile21, 0);
-
-        // if (roomTiles[x][y] ==22)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile22, 0);
-
-        // if (roomTiles[x][y] ==23)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile23, 0);
-
-        // if (roomTiles[x][y] ==24)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile24, 0);
-
-        // if (roomTiles[x][y] ==25)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile25, 0);
-
-        // if (roomTiles[x][y] ==26)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile26, 0);
-
-        // if (roomTiles[x][y] ==27)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile27, 0);
-
-        // if (roomTiles[x][y] ==28)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile28, 0);
-
-        // if (roomTiles[x][y] ==29)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile29, 0);
-
-        // if (roomTiles[x][y] ==30)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile30, 0);
-
-        // if (roomTiles[x][y] ==31)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile31, 0);
-
-        // if (roomTiles[x][y] ==32)
-        // {
-        //   Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile32, 0);
-        //   int r = rand() % 1000;
-        //   if(r==0)
-        //   Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0); // sparkle
-        // }
-
-        // if (roomTiles[x][y] ==33)
-        // Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tile33, 0);   
 
         uint8_t tileNumber = roomTiles[x][y];
 
         switch (tileNumber) {
 
-          case 21 ... 31:
-          case 33:
+          case 21 ... 35:
             Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
-            break;
-
-          case 32:
-            {
-              Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21);  
-              int r = rand() % 1000;
-              if (r==0)
-              Sprites::drawOverwrite((x*16)-screenX,(y*16)-screenY, tiles, tileNumber - 21); // sparkle
-            }
             break;
 
           case 7:
@@ -1377,28 +1304,32 @@ void drawTiles()
           case 9:
             Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
             break;
+
+          case 12:
+            Sprites::drawSelfMasked(((x*16)+7)-screenX,(y*16)-screenY, plant, animVerySlow3 - 1);
+            break;
+
+          case 13:
+            Sprites::drawSelfMasked((x*16)-screenX,((y*16)+8)-screenY, mushrooms, 0);
+            break;
+
+          case 14:
+            Sprites::drawSelfMasked(((x*16)+3)-screenX,(y*16)-screenY, vines, animVerySlow3 - 1);
+            break;
+
+          case 15:
+            Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, mushroom, 0);
+            break;
+
+          case 16:
+            Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, branch, 0);
+            break;
+
+          case 17:
+            Sprites::drawSelfMasked((x*16)-screenX,((y*16)+6)-screenY, sideBranch, 0);
+            break;
           
         }
-
-        //////////
-
-        // if (roomTiles[x][y] ==7)
-        // {
-          // if(animSlow3 ==1)
-          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid1, 0);
-
-          // if(animSlow3 ==2)
-          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid2, 0);
-
-          // if(animSlow3 ==3)
-          // Sprites::drawSelfMasked((x*16)-screenX,(y*16)-screenY, acid3, 0);
-        // }
-
-        // if (roomTiles[x][y] ==8)
-        // Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeFloor, spikeFloorMask,0, 0);
-
-        // if (roomTiles[x][y] ==9)
-        // Sprites::drawExternalMask((x*16)-screenX,(y*16)-screenY, spikeRoof, spikeRoofMask,0, 0);
       }
     }
   }
@@ -1488,15 +1419,6 @@ void drawDrones()
   {
     droneScreenX[i] = droneX[i]/10;
     droneScreenY[i] = droneY[i]/10;
-
-    // if (animSlow3 == 1)
-    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone1,  0);
-
-    // if (animSlow3 == 2)
-    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone2,  0);
-
-    // if (animSlow3 == 3)
-    // Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone3,  0);
 
     Sprites::drawSelfMasked(droneScreenX[i]-screenX, droneScreenY[i]-screenY, drone,  animSlow3 -1);
 
@@ -1682,25 +1604,10 @@ void drawPlayer()
     {
       if(stoppedX)
       {
-        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
         Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyRight, 1);
       }
       else
       {
-        // if(animSlow3==1)
-        // {
-        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight1,0);
-        // }
-
-        // if(animSlow3==2)
-        // {
-        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomRightBody,0);
-        // }
-
-        // if(animSlow3==3)
-        // {
-        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkRight3,0);
-        // }
         Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyRight, animSlow3 - 1);
       }
     }
@@ -1720,25 +1627,10 @@ void drawPlayer()
     {
       if(stoppedX)
       {
-        // Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
         Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyLeft, 1);
       }
       else
       {
-        // if(animSlow3==1)
-        // {
-        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft1,0);
-        // }
-
-        // if(animSlow3==2)
-        // {
-        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomLeftBody,0);
-        // }
-
-        // if(animSlow3==3)
-        // {
-        //   Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomWalkLeft3,0);
-        // }
         Sprites::drawOverwrite((playerScreenX+3)-offsetX, (playerScreenY+11)-offsetY, shroomBodyLeft, animSlow3 - 1);
       }
     }
